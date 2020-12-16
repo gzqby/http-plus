@@ -15,8 +15,5 @@ jobs:
         run: npm install
       - name: npm lint
         run: npm run lint-fix
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with: 
-          start: npm run start
-          wait-on: http://localhost:3000
+      - name: npm test
+        run: npm run test
