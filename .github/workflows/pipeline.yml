@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  simple_deployment_pipeline:
+  pipeline:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -15,3 +15,9 @@ jobs:
         run: npm install
       - name: npm lint
         run: npm run lint-fix
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with: 
+          command: npm run test:e2e
+          start: npm run start
+          wait-on: http://localhost:3000
