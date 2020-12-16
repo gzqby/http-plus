@@ -1,0 +1,24 @@
+{
+  "name": "fso",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
+    "dev": "NODE_ENV=development nodemon ./src/index.js",
+    "start": "NODE_ENV=production node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
