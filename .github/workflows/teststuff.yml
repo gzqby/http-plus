@@ -17,7 +17,7 @@ jobs:
       - name: commits
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS" && echo "$GITHUB_CONTEXT"
+        run: echo "$COMMITS"
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
@@ -26,5 +26,5 @@ jobs:
         if: ${{ github.event_name != 'push' }}
         run: echo "if!=push"
       - name: if==push
-        if: ${{ github.event_name != 'push' }}
+        if: ${{ github.event_name == 'push' }}
         run: echo "if==push"
