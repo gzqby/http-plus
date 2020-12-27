@@ -3,7 +3,7 @@ const http = require('http');
 const { requestResponseController } = require('./index');
 const reqRegistry = require('./reqRegistry');
 
-function App() {
+function httpPlus({preUrl}={}) {
   return {
     get(url, cb) {
       reqRegistry.add('get', url, cb);
@@ -50,4 +50,4 @@ function App() {
   };
 }
 
-module.exports = App();
+module.exports = httpPlus();
