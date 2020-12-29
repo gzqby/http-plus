@@ -67,15 +67,9 @@ const resPlus = (res) => {
   }
 }
 
-const composeHandler = () => {
-  return () => {
-    
-  };
-}
-
 // todo:中间件 wrapReq wrapRes
 module.exports.router = (method, url, req, res) => {
-  const cb = getRequestHandler(reqRegistry, method, url);
+  const {cb} = getRequestHandler(reqRegistry, method, url);
   const reqP = reqPlus(req);
   const resP = resPlus(res);
   // console.log(res.__proto__.__proto__);
