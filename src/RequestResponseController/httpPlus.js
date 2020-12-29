@@ -56,11 +56,12 @@ function httpPlus({preUrl}={}) {
     },
     use(url, cb) {
       if(url){
-        if(typeof cb === 'function'){
-          useMiddleWare(cb);
+        if(typeof url === 'function'){
+          useMiddleWare(url);
           return;
         }
       }
+      //todo: 外置路由Router
     }
   };
 }

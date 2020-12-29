@@ -1,5 +1,6 @@
 const reqRegistry = require('./reqRegistry');
 const {getRequestHandler} = require('./utils');
+const {getMiddleWare} = require('./middleware');
 
 const reqPlus = (req) => {
   const { 
@@ -56,12 +57,20 @@ const resPlus = (res) => {
     getHeaders,
     hasHeader,
     write,
-    end: (something) => {
+    end(something) {
       //dosomething
-      res.end(something);
+      if(something) {
+        res.end(something);
+      }else{
+        res.end(' ');
+      }
     },
-    send: (something)=>{
+    send(something) {
       res.end(JSON.stringify(something));
+    },
+    status(num) {
+      res.statusCode = num;
+      return this;
     },
     nativeResponse: res,
   }
@@ -69,12 +78,12 @@ const resPlus = (res) => {
 
 // todo:中间件 wrapReq wrapRes
 module.exports.router = (method, url, req, res) => {
-  const {cb} = getRequestHandler(reqRegistry, method, url);
+  const cb = getRequestHandler(method, url, reqRegistry, getMiddleWare());
   const reqP = reqPlus(req);
   const resP = resPlus(res);
   // console.log(res.__proto__.__proto__);
   if (cb) {
     return cb(reqP, resP);
   }
-  return res.end('NOT FIND');
+  return resP.status(404).end('NOT FOUND');
 };
